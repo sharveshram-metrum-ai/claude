@@ -3,7 +3,7 @@
 Custom Claude Code status line. Renders a bar like:
 
 ```
-🖥 host │ 📁 project │ 🌿 branch ✓ │ 🤖 Opus │ 🧠 92% │ 🎭 default │ ⏳4h58m
+🖥 host │ 📁 project │ 🌿 branch ✓ │ 🤖 Opus │ 🧠 79% left │ 🎭 default │ 🎀 ponytail:ultra │ 🧩 ponytail,superpowers │ MCP:context7 │ ⏳21% · 7m
 ```
 
 | Segment | Meaning |
@@ -12,10 +12,14 @@ Custom Claude Code status line. Renders a bar like:
 | 📁 | current project folder |
 | 🌿 | git branch + sync (`✓` in sync · `⇡` ahead · `⇣` behind · `⚠` no upstream) |
 | 🤖 | active model |
-| 🧠 | context window remaining % |
+| 🧠 | context window **remaining** (available) % |
 | 🎭 | active output style |
+| 🎀 | ponytail mode — shown only while active (reads `~/.claude/.ponytail-active`) |
+| 🧩 | installed/enabled plugins (from `settings.json` `enabledPlugins`) |
 | MCP: | MCP servers configured for the project (hidden when none) |
-| ⏳ | time until the 5-hour usage window resets |
+| ⏳ | 5-hour usage window: `% of quota used · time until reset` |
+
+Data-dependent segments (🧠 and ⏳) only appear after the first API call in a session populates them.
 
 ## Install (per machine, all projects)
 
@@ -23,7 +27,7 @@ Custom Claude Code status line. Renders a bar like:
 bash install-statusline.sh
 ```
 
-This writes `~/.claude/statusline-command.sh` and adds the `statusLine` entry to
+Writes `~/.claude/statusline-command.sh` and adds the `statusLine` entry to
 `~/.claude/settings.json` (merging, not overwriting).
 
 ## Install (per project, travels with the repo)
@@ -43,12 +47,3 @@ Copy `statusline-command.sh` into the repo's `.claude/` folder and add to
 ## Requirements
 
 `jq` and `git` must be installed. Takes effect on the next prompt.
-
-
-
-
-
-git clone https://github.com/sharveshram-metrum-ai/claude.git
-cd claude
-bash install-statusline.sh
-That installs it machine-wide (all your projects). Just needs jq and git present. Done â no gate, works immediately.
