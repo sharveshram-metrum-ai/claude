@@ -43,3 +43,12 @@ Copy `statusline-command.sh` into the repo's `.claude/` folder and add to
 ## Requirements
 
 `jq` and `git` must be installed. Takes effect on the next prompt.
+
+
+
+
+
+git clone https://github.com/sharveshram-metrum-ai/claude.git
+cd claude
+bash install-statusline.sh
+That installs it machine-wide (all your projects). Just needs jq and git present. Done â no gate, works immediately.
